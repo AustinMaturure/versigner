@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from 'react';
 
 function Home() {
+  function rotateArray(arr, count) {
+    const rotatedArray = [...arr];
+    for (let i = 0; i < count; i++) {
+        const lastElement = rotatedArray.pop();
+        rotatedArray.unshift(lastElement);
+    }
+    return rotatedArray;
+}
+
   const initialDate = new Date('Tue Feb 20 2024 09:34:08 GMT-0800');
-  const currentDate = new Date('Tue Mar 5 2024 09:34:08 GMT-0800');
+  const currentDate = new Date('Wed Jun 12 2024 09:34:08 GMT-0800');
   
   // Calculate the difference in milliseconds between the two dates
   const differenceInMilliseconds = currentDate.getTime() - initialDate.getTime();
@@ -13,12 +22,12 @@ function Home() {
   let count = 1;
    const [bible, setBible] = useState(null);
    let names = ['Muno', 'B', 'Parthe', 'Mama'];
+   console.log(names)
   // Check if the difference in weeks is a whole number
   if (differenceInMilliseconds % (7 * 24 * 60 * 60 * 1000) === 0) {
     count = count + differenceInWeeks;
     
-      // Rotate the names array by one index
-      names = [...names.slice(1), names[0]];
+    names = rotateArray(names, count);
       
   
   }
@@ -28,7 +37,7 @@ function Home() {
  
   const apiKey = '818d9b2a9c99e0f59389bd3de8abc0b4'; // Replace with your actual API key
   const bibleId = '7142879509583d59-01'; // Replace with the ID of the bible you want to fetch
-  const apiUrl = `https://api.scripture.api.bible/v1/bibles/${bibleId}/chapters/GEN.${count}`;
+  const apiUrl = `https://api.scripture.api.bible/v1/bibles/${bibleId}/chapters/JER.${count}`;
 
   useEffect(() => {
     fetch(apiUrl, {
@@ -120,6 +129,7 @@ function Home() {
       {bible && (
         
       <div><h1>{bible.reference}</h1>
+      
         {partitions.map((partition, index) => (
           <div key={index}>
             <p>{names[index]} : {verseRanges[index].start} - {verseRanges[index].end}</p>
