@@ -1,5 +1,5 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Author',Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -29,13 +29,32 @@ body {
   justify-content: center;
   min-width: 320px;
   min-height: 100vh;
-}p{
+  overflow-x: hidden;
+}.person{
   text-align: center;
+  font-size: 1.8rem;
+  display: flex;
+  border: 2px solid #d3d3d3;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 12px;
+  box-shadow: -2px 2px #d3d3d3 ;
+  padding: 6px;
+}
+
+p{
+  margin: 0px;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+ 
+}
+
+h2{
+  color: #213547de;
 }
 
 button {
@@ -54,10 +73,7 @@ button {
 button:hover {
   border-color: #646cff;
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+
 
 @media (prefers-color-scheme: light) {
   :root {

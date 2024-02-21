@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './home.css'
 
 function Home() {
   function rotateArray(arr, count) {
@@ -175,21 +176,22 @@ function Home() {
       <section className='main'>
         <div className="content">
           <div className="titles">
-            <h2>{currentDate.toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</h2>
+            <h2><h4>week</h4>{currentDate.toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</h2>
         <h1>{bible.reference}</h1>
           </div>
         
         <div className="partions">
           {partitions.map((partition, index) => (
-          <div key={index}>
-            <p>{names[index]} : {verseRanges[index].start} - {verseRanges[index].end}</p>
+          <div key={index} className='person'>
+            <div><p>{names[index]}</p></div>  <div><p className="verses">{verseRanges[index].start} - {verseRanges[index].end}</p></div>
             
           </div>
         ))}
         </div>
-        </div>
+        </div><div className="btn-div"><button className='btn-next' onClick={handleAddSevenDays}>NEXT WEEK</button>
+          </div>
       </section>
-    )} <button onClick={handleAddSevenDays}>Add 7 Days</button>
+    )} 
     </>
   );
 }
