@@ -11,8 +11,13 @@ function Home() {
 }
 
   const initialDate = new Date('Tue Feb 20 2024 09:34:08 GMT-0800');
-  const currentDate = new Date('Tue Feb 27 2024 09:34:08 GMT-0800') ;
-  
+  const [currentDate, setCurrentDate] = useState(new Date('Tue Feb 27 2024 09:34:08 GMT-0800'));
+
+  const handleAddSevenDays = () => {
+    const newDate = new Date(currentDate);
+    newDate.setDate(newDate.getDate() + 7);
+    setCurrentDate(newDate);
+  };
   // Calculate the difference in milliseconds between the two dates
   const differenceInMilliseconds = currentDate.getTime() - initialDate.getTime();
   
@@ -145,7 +150,7 @@ function Home() {
           </div>
         ))}
       </div>
-    )}
+    )} <button onClick={handleAddSevenDays}>Add 7 Days</button>
     </>
   );
 }
