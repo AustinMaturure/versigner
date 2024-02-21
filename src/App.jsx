@@ -12,40 +12,46 @@ function Home() {
 
   const initialDate = new Date('Tue Feb 20 2024 09:34:08 GMT-0800');
   const [currentDate, setCurrentDate] = useState(new Date('Tue Feb 27 2024 09:34:08 GMT-0800'));
+  const bibleBooksAbbreviations = [
+    "GEN", "EXO", "LEV", "NUM", "DEU", "JOS", "JDG", "RUT", "1SA", "2SA", "1KI", "2KI", "1CH", "2CH", "EZR", "NEH", "EST", "JOB", "PSA", "PRO", "ECC", "SON", "ISA", "JER", "LAM", "EZE", "DAN", "HOS", "JOE", "AMO", "OBA", "JON", "MIC", "NAH", "HAB", "ZEP", "HAG", "ZEC", "MAL", "MAT", "MAR", "LUK", "JOH", "ACT", "ROM", "1CO", "2CO", "GAL", "EPH", "PHI", "COL", "1TH", "2TH", "1TI", "2TI", "TIT", "PHM", "HEB", "JAM", "1PE", "2PE", "1JO", "2JO", "3JO", "JUD", "REV"
+  ];
+  
 
   const handleAddSevenDays = () => {
     const newDate = new Date(currentDate);
     newDate.setDate(newDate.getDate() + 7);
     setCurrentDate(newDate);
   };
+
+ 
   // Calculate the difference in milliseconds between the two dates
   const differenceInMilliseconds = currentDate.getTime() - initialDate.getTime();
   
   // Convert milliseconds to weeks (1 week = 7 days = 7 * 24 * 60 * 60 * 1000 milliseconds)
   const differenceInWeeks = Math.floor(differenceInMilliseconds / (7 * 24 * 60 * 60 * 1000));
+  let newcount = 1
   
-  let [count, setCount] = useState(parseInt(import.meta.env.VITE_COUNT))
-  console.log(count)
+  
    const [bible, setBible] = useState(null);
+   let [chapCount, setChapCount] = useState(parseInt(import.meta.env.VITE_CHAPCOUNT));
    let names = ['Muno', 'B', 'Parthe', 'Mama'];
    console.log(names)
   // Check if the difference in weeks is a whole number
-  if (differenceInMilliseconds % (7 * 24 * 60 * 60 * 1000) === 0) {
-    count += differenceInWeeks;
-    import.meta.env.VITE_COUNT +=  differenceInWeeks;
-    
-    names = rotateArray(names, count);
-      
-  
-  }
-  
-  console.log("Count:", count);
+  const [count, setCount] = useState(1); // Initialize count to 1
+
+  useEffect(() => {
+    if (differenceInMilliseconds % (7 * 24 * 60 * 60 * 1000) >= 0) {
+      setCount(prevCount => prevCount + 1); // Increment count based on differenceInWeeks
+    }
+  }, [differenceInMilliseconds, differenceInWeeks]); // Watch for changes in these variables
+
+  console.log("Count is:", count);
   
  
   const apiKey = '818d9b2a9c99e0f59389bd3de8abc0b4'; // Replace with your actual API key
   const bibleId = '7142879509583d59-01'; // Replace with the ID of the bible you want to fetch
-  const apiUrl = `https://api.scripture.api.bible/v1/bibles/${bibleId}/chapters/GEN.${count}`;
-
+  const apiUrl = `https://api.scripture.api.bible/v1/bibles/${bibleId}/chapters/${bibleBooksAbbreviations[chapCount]}.${count}`;
+  let countSetSuccessful = false;
   useEffect(() => {
     fetch(apiUrl, {
       headers: {
@@ -60,11 +66,17 @@ function Home() {
       })
       .then(data => {
         console.log('Bible:', data);
-        console.log('content', data.data.content)
+        console.log('content', data.data.content);
         setBible(data.data);
       })
-      .catch(error => {console.error('Error fetching bible:', error);setCount(1)} );
-  }, [apiUrl, apiKey]); 
+      .catch(error => {
+        console.error('Error fetching bible:', error);
+        setCount(1); // Reset count to 1
+        setChapCount(prevChapCount => prevChapCount + 1); // Increment chapCount
+      }); 
+  }, [apiUrl, apiKey]);  
+
+  
 
   useEffect(() => {
     // Check if Bible content is available
@@ -140,8 +152,8 @@ function Home() {
   return (
     <>
       {bible && (
-        
-      <div><h1>{bible.reference}</h1>
+       
+      <div><h2>{currentDate.toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</h2> <h1>{bible.reference}</h1>
       
         {partitions.map((partition, index) => (
           <div key={index}>
