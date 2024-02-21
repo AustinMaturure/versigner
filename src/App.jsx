@@ -86,7 +86,7 @@ function Home() {
   ];
   const [names, setNames] = useState(["Mama", "B", "Parthe", "Muno"]);
   const [week, setWeek] = useState("This");
-  const [cweek, setcWeek] = useState(2);
+  const [cweek, setcWeek] = useState(1);
 
   const handleAddSevenDays = () => {
     const newDate = new Date(currentDate);
@@ -106,14 +106,15 @@ function Home() {
     const differenceInDays = Math.floor(
       (nextWeekDate - new Date()) / (1000 * 60 * 60 * 24),
     );
-    if (differenceInDays <= 2) {
-      setWeek("This");
-    } else {
-      setWeek("In (" + cweek + ")");
-    }
+    setWeek("Next");
+    if (differenceInWeeks != 0) {
+     setWeek("In (" + cweek + ")");
+    } 
+       
+    
 
     setcWeek((previous) => previous + 1);
-    setWeek("In (" + cweek + ")");
+    
     setCount((prevCount) => prevCount + 1);
 
     const rotatedNames = rotateArray(names, 1); // Rotate names array by 4 positions
