@@ -17,16 +17,32 @@ function Home() {
     "GEN", "EXO", "LEV", "NUM", "DEU", "JOS", "JDG", "RUT", "1SA", "2SA", "1KI", "2KI", "1CH", "2CH", "EZR", "NEH", "EST", "JOB", "PSA", "PRO", "ECC", "SON", "ISA", "JER", "LAM", "EZE", "DAN", "HOS", "JOE", "AMO", "OBA", "JON", "MIC", "NAH", "HAB", "ZEP", "HAG", "ZEC", "MAL", "MAT", "MAR", "LUK", "JOH", "ACT", "ROM", "1CO", "2CO", "GAL", "EPH", "PHI", "COL", "1TH", "2TH", "1TI", "2TI", "TIT", "PHM", "HEB", "JAM", "1PE", "2PE", "1JO", "2JO", "3JO", "JUD", "REV"
   ];
   const [names, setNames] = useState(['Muno', 'B', 'Parthe', 'Mama']);
-  const [week, setWeek] = useState('This')
+  const [week, setWeek] = useState('Next')
   const [cweek, setcWeek] = useState(2)
   const handleAddSevenDays = () => {
     const newDate = new Date(currentDate);
     newDate.setDate(newDate.getDate() + 7);
+    
     setCurrentDate(newDate);
     console.log('button pressed');
-    console.log(names)
+
+    const nextWeekDate = new Date(currentDate);
+  nextWeekDate.setDate(nextWeekDate.getDate() + 7);
+
+  // Calculate the difference in days between current date and next week's date
+  const differenceInDays = Math.floor((nextWeekDate - new Date()) / (1000 * 60 * 60 * 24));
+
+  // Set week based on difference in days
+  if (differenceInDays <= 2) {
+    setWeek('This');
+  } else {
+    setWeek('In (' + cweek +")");
+  }
+    
     setcWeek(previous => previous + 1)
     setWeek('In (' + cweek +")")
+
+    setCount(prevCount => prevCount + 1);
     
     const rotatedNames = rotateArray(names, 1); // Rotate names array by 4 positions
     setNames(rotatedNames); // Update names array with rotated names
@@ -46,13 +62,12 @@ function Home() {
   
    console.log(names)
   // Check if the difference in weeks is a whole number
-  const [count, setCount] = useState(18); // Initialize count to 1
+  const [count, setCount] = useState(17); 
 
   useEffect(() => {
-    if (differenceInMilliseconds % (7 * 24 * 60 * 60 * 1000) >= 0) {
-      setCount(prevCount => prevCount + 1); // Increment count based on differenceInWeeks
-    }
-  }, [differenceInMilliseconds, differenceInWeeks]); // Watch for changes in these variables
+    // Your logic that depends on the count value
+    console.log("Count is:", count);
+  }, [count]);// Watch for changes in these variables
 
   console.log("Count is:", count);
   
@@ -179,7 +194,7 @@ function Home() {
       <section className='main'>
         <div className="content">
           <div className="titles">
-            <h2><h4>{week} Weeks</h4>{currentDate.toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</h2>
+            <h2><p className='week'>{week} Weeks</p>{currentDate.toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</h2>
         <h1>{bible.reference}</h1>
           </div>
         

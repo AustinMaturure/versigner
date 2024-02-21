@@ -8,7 +8,7 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  transition: all 0.8s; /* Reduced transition time for smoother animation */
+  
 }
 
 .btn-div {
@@ -39,7 +39,7 @@
   box-shadow: none; /* Removed shadow on button click */
 }
 
-h4 {
+.week {
   font-size: 1rem;
   padding: 0;
   margin: 0;
