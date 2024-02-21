@@ -36,3 +36,6 @@ bower_components
 psd
 thumb
 sketch
+
+# Local Netlify folder
+.netlify
