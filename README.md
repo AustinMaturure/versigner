@@ -1,13 +1,4 @@
-<<<<<<< HEAD
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-=======
 # versigner
-web app to assign weekly reading to family, while respecting sementics as well
->>>>>>> 81928fc6e512c70d130278ed670b46f77e6919d1
+Web app to assign weekly reading to family, while respecting sementics as well
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/21441854-3e89-44aa-a3df-ef6854d8cb3a/deploy-status)](https://app.netlify.com/sites/verse-assigner/deploys)
