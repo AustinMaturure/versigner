@@ -62,7 +62,7 @@ function Home() {
   
    console.log(names)
   // Check if the difference in weeks is a whole number
-  const [count, setCount] = useState(17); 
+  const [count, setCount] = useState(18); 
 
   useEffect(() => {
     // Your logic that depends on the count value
