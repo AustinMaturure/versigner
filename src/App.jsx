@@ -109,7 +109,7 @@
         );
         setWeek("Next");
         if (differenceInWeeks != 0) {
-        setWeek("In (" + cweek + ")");
+        setWeek("In " + cweek + " ");
         } 
           
         
