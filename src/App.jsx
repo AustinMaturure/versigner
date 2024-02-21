@@ -11,7 +11,7 @@ function Home() {
 }
 
   const initialDate = new Date('Tue Feb 20 2024 09:34:08 GMT-0800');
-  const [currentDate, setCurrentDate] = useState(new Date('Tue Feb 27 2024 09:34:08 GMT-0800'));
+  const [currentDate, setCurrentDate] = useState(new Date());
   const bibleBooksAbbreviations = [
     "GEN", "EXO", "LEV", "NUM", "DEU", "JOS", "JDG", "RUT", "1SA", "2SA", "1KI", "2KI", "1CH", "2CH", "EZR", "NEH", "EST", "JOB", "PSA", "PRO", "ECC", "SON", "ISA", "JER", "LAM", "EZE", "DAN", "HOS", "JOE", "AMO", "OBA", "JON", "MIC", "NAH", "HAB", "ZEP", "HAG", "ZEC", "MAL", "MAT", "MAR", "LUK", "JOH", "ACT", "ROM", "1CO", "2CO", "GAL", "EPH", "PHI", "COL", "1TH", "2TH", "1TI", "2TI", "TIT", "PHM", "HEB", "JAM", "1PE", "2PE", "1JO", "2JO", "3JO", "JUD", "REV"
   ];
@@ -19,8 +19,9 @@ function Home() {
 
   const handleAddSevenDays = () => {
     const newDate = new Date(currentDate);
-    newDate.setDate(newDate.getDate() + 7);
+    newDate.setDate(newDate.getDate() + 6);
     setCurrentDate(newDate);
+    console.log('button pressed')
   };
 
  
@@ -71,8 +72,18 @@ function Home() {
       })
       .catch(error => {
         console.error('Error fetching bible:', error);
-        setCount(1); // Reset count to 1
-        setChapCount(prevChapCount => prevChapCount + 1); // Increment chapCount
+        if (error.response && error.response.status === 400) {
+          const nextChapter = error.response.data.next;
+          if (nextChapter === 0) {
+            setChapCount(prevChapCount => prevChapCount + 1); // Increment chapCount
+          } else {
+            setCount(0); // Reset count to 0
+          }
+        } else {
+          // Handle other errors
+          setCount(1); // Reset count to 1
+          setChapCount(prevChapCount => prevChapCount + 1); // Increment chapCount
+        }
       }); 
   }, [apiUrl, apiKey]);  
 
@@ -87,7 +98,7 @@ function Home() {
     if (bible && bible.content) { // Add null check for bible
         // Remove HTML tags from Bible content
         const textContent = removeHtmlTags(bible.content);
-        console.log('Text content:', textContent); // Log the text content
+         // Log the text content
 
         // Use a regular expression to match verse elements
         const verses = textContent.match(/<span data-number="\d+" class="v">\d+<\/span>/g);
@@ -153,7 +164,7 @@ function Home() {
     <>
       {bible && (
        
-      <div><h2>{currentDate.toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</h2> <h1>{bible.reference}</h1>
+      <div><h2>{currentDate.toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</h2><h1>{bible.reference}</h1>
       
         {partitions.map((partition, index) => (
           <div key={index}>
