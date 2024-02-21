@@ -12,18 +12,21 @@ function Home() {
 }
 
   const initialDate = new Date('Tue Feb 20 2024 09:34:08 GMT-0800');
-  const [currentDate, setCurrentDate] = useState(new Date('Tue Feb 27 2024 09:34:08 GMT-0800'));
+  const [currentDate, setCurrentDate] = useState(new Date());
   const bibleBooksAbbreviations = [
     "GEN", "EXO", "LEV", "NUM", "DEU", "JOS", "JDG", "RUT", "1SA", "2SA", "1KI", "2KI", "1CH", "2CH", "EZR", "NEH", "EST", "JOB", "PSA", "PRO", "ECC", "SON", "ISA", "JER", "LAM", "EZE", "DAN", "HOS", "JOE", "AMO", "OBA", "JON", "MIC", "NAH", "HAB", "ZEP", "HAG", "ZEC", "MAL", "MAT", "MAR", "LUK", "JOH", "ACT", "ROM", "1CO", "2CO", "GAL", "EPH", "PHI", "COL", "1TH", "2TH", "1TI", "2TI", "TIT", "PHM", "HEB", "JAM", "1PE", "2PE", "1JO", "2JO", "3JO", "JUD", "REV"
   ];
   const [names, setNames] = useState(['Muno', 'B', 'Parthe', 'Mama']);
-
+  const [week, setWeek] = useState('This')
+  const [cweek, setcWeek] = useState(2)
   const handleAddSevenDays = () => {
     const newDate = new Date(currentDate);
     newDate.setDate(newDate.getDate() + 7);
     setCurrentDate(newDate);
     console.log('button pressed');
     console.log(names)
+    setcWeek(previous => previous + 1)
+    setWeek('In (' + cweek +")")
     
     const rotatedNames = rotateArray(names, 1); // Rotate names array by 4 positions
     setNames(rotatedNames); // Update names array with rotated names
@@ -176,7 +179,7 @@ function Home() {
       <section className='main'>
         <div className="content">
           <div className="titles">
-            <h2><h4>week</h4>{currentDate.toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</h2>
+            <h2><h4>{week} Weeks</h4>{currentDate.toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</h2>
         <h1>{bible.reference}</h1>
           </div>
         

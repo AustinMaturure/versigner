@@ -59,7 +59,7 @@
  }
 .partions{
   border-radius: 22px;
-  background-color: #fffffff1;
+  background-color: rgba(246, 244, 244, 0.945);
   padding-left: 4rem;
   padding-right: 4rem;
   padding-top: 1rem;
@@ -70,25 +70,3 @@
   gap: 16px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
