@@ -11,7 +11,7 @@ function Home() {
 }
 
   const initialDate = new Date('Tue Feb 20 2024 09:34:08 GMT-0800');
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const [currentDate, setCurrentDate] = useState(new Date('Tue Feb 27 2024 09:34:08 GMT-0800'));
   const bibleBooksAbbreviations = [
     "GEN", "EXO", "LEV", "NUM", "DEU", "JOS", "JDG", "RUT", "1SA", "2SA", "1KI", "2KI", "1CH", "2CH", "EZR", "NEH", "EST", "JOB", "PSA", "PRO", "ECC", "SON", "ISA", "JER", "LAM", "EZE", "DAN", "HOS", "JOE", "AMO", "OBA", "JON", "MIC", "NAH", "HAB", "ZEP", "HAG", "ZEC", "MAL", "MAT", "MAR", "LUK", "JOH", "ACT", "ROM", "1CO", "2CO", "GAL", "EPH", "PHI", "COL", "1TH", "2TH", "1TI", "2TI", "TIT", "PHM", "HEB", "JAM", "1PE", "2PE", "1JO", "2JO", "3JO", "JUD", "REV"
   ];
@@ -77,12 +77,10 @@ function Home() {
           if (nextChapter === 0) {
             setChapCount(prevChapCount => prevChapCount + 1); // Increment chapCount
           } else {
-            setCount(0); // Reset count to 0
+            setCount(1); // Reset count to 0
           }
-        } else {
-          // Handle other errors
-          setCount(1); // Reset count to 1
-          setChapCount(prevChapCount => prevChapCount + 1); // Increment chapCount
+        } else if (error.response && error.response.status === 503) {
+         alert('loading')
         }
       }); 
   }, [apiUrl, apiKey]);  
