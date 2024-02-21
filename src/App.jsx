@@ -15,13 +15,18 @@ function Home() {
   const bibleBooksAbbreviations = [
     "GEN", "EXO", "LEV", "NUM", "DEU", "JOS", "JDG", "RUT", "1SA", "2SA", "1KI", "2KI", "1CH", "2CH", "EZR", "NEH", "EST", "JOB", "PSA", "PRO", "ECC", "SON", "ISA", "JER", "LAM", "EZE", "DAN", "HOS", "JOE", "AMO", "OBA", "JON", "MIC", "NAH", "HAB", "ZEP", "HAG", "ZEC", "MAL", "MAT", "MAR", "LUK", "JOH", "ACT", "ROM", "1CO", "2CO", "GAL", "EPH", "PHI", "COL", "1TH", "2TH", "1TI", "2TI", "TIT", "PHM", "HEB", "JAM", "1PE", "2PE", "1JO", "2JO", "3JO", "JUD", "REV"
   ];
-  
+  const [names, setNames] = useState(['Muno', 'B', 'Parthe', 'Mama']);
 
   const handleAddSevenDays = () => {
     const newDate = new Date(currentDate);
     newDate.setDate(newDate.getDate() + 7);
     setCurrentDate(newDate);
-    console.log('button pressed')
+    console.log('button pressed');
+    console.log(names)
+    
+    const rotatedNames = rotateArray(names, 1); // Rotate names array by 4 positions
+    setNames(rotatedNames); // Update names array with rotated names
+    console.log(rotatedNames);
   };
 
  
@@ -34,7 +39,7 @@ function Home() {
   
    const [bible, setBible] = useState(null);
    let [chapCount, setChapCount] = useState(parseInt(import.meta.env.VITE_CHAPCOUNT));
-   let names = ['Muno', 'B', 'Parthe', 'Mama'];
+  
    console.log(names)
   // Check if the difference in weeks is a whole number
   const [count, setCount] = useState(18); // Initialize count to 1
@@ -85,7 +90,7 @@ function Home() {
            // Handle other errors
            setChapCount(prevChapCount => prevChapCount + 1); // Increment chapCount
           setCount(1); // Reset count to 1
-          alert('An errorc big occurred')
+          alert('Fetching Next Book ...')
         }
       }); 
   }, [apiUrl, apiKey, chapCount, count]);
@@ -167,15 +172,23 @@ function Home() {
     <>
       {bible && (
        
-      <div><h2>{currentDate.toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</h2><h1>{bible.reference}</h1>
-      
-        {partitions.map((partition, index) => (
+      <section className='main'>
+        <div className="content">
+          <div className="titles">
+            <h2>{currentDate.toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</h2>
+        <h1>{bible.reference}</h1>
+          </div>
+        
+        <div className="partions">
+          {partitions.map((partition, index) => (
           <div key={index}>
             <p>{names[index]} : {verseRanges[index].start} - {verseRanges[index].end}</p>
             
           </div>
         ))}
-      </div>
+        </div>
+        </div>
+      </section>
     )} <button onClick={handleAddSevenDays}>Add 7 Days</button>
     </>
   );

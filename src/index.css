@@ -26,8 +26,11 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
+  justify-content: center;
   min-width: 320px;
   min-height: 100vh;
+}p{
+  text-align: center;
 }
 
 h1 {
@@ -43,6 +46,8 @@ button {
   font-weight: 500;
   font-family: inherit;
   background-color: #1a1a1a;
+  align-self: center;
+  display: flex;
   cursor: pointer;
   transition: border-color 0.25s;
 }
