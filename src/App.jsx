@@ -183,12 +183,12 @@ function Home() {
         <div className="partions">
           {partitions.map((partition, index) => (
           <div key={index} className='person'>
-            <div><p>{names[index]}</p></div>  <div><p className="verses">{verseRanges[index].start} - {verseRanges[index].end}</p></div>
+            <div ><p>{names[index]}</p></div>  <div><p className="verses">{verseRanges[index].start} - {verseRanges[index].end}</p></div>
             
           </div>
         ))}
         </div>
-        </div><div className="btn-div"><button className='btn-next' onClick={handleAddSevenDays}>NEXT WEEK</button>
+        </div><div className="btn-div"><button className='btn-next' onClick={handleAddSevenDays}>Next Week</button>
           </div>
       </section>
     )} 

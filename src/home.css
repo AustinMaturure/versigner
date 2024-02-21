@@ -24,17 +24,17 @@
   align-self: center;
  
   font-size: 1.6rem;
-  box-shadow: 3px 3px #d3d3d3 ;
-  border: 3px solid #d3d3d3 ;
+  box-shadow: 3px 3px #efefef ;
+  border: 3px solid #efefef ;
   padding: 14px;
   font-weight: 900;
   color: #213547;
   
-  transition: all 2s;
+  transition: all 1s;
  }
 
  .verses{
-  background-color: #d3d3d3;
+  background-color: #efefef;
   border-radius: 12px;
   align-self: last baseline;
   padding: 6px;
@@ -42,8 +42,8 @@
 
  .btn-next:active{
   box-shadow: 0px solid #ffffff;
-  transform: translateX(-3px);
-  transform: translateY(-3px);
+  transform: translateX(3px);
+  transform: translateY(3px);
  }
 
  h4 {
@@ -59,7 +59,7 @@
  }
 .partions{
   border-radius: 22px;
-  background-color: #f8f7f7;
+  background-color: #fffffff1;
   padding-left: 4rem;
   padding-right: 4rem;
   padding-top: 1rem;

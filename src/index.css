@@ -36,7 +36,7 @@ body {
   display: flex;
   border: 2px solid #d3d3d3;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   gap: 10px;
   border-radius: 12px;
   box-shadow: -2px 2px #d3d3d3 ;
@@ -50,6 +50,7 @@ p{
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  margin-top: 0px;
  
 }
 
