@@ -1,72 +1,64 @@
 #root {
   max-width: 1280px;
- 
   padding: 1rem;
   text-align: center;
 }
- .main{
+
+.main {
   display: flex;
   flex-direction: column;
-  
   text-align: center;
- 
-  transition: all 14s;
- }
+  transition: all 0.8s; /* Reduced transition time for smoother animation */
+}
 
- .btn-div{
-  align-items: center;
+.btn-div {
   display: flex;
   justify-content: center;
-  justify-items: center;
-  padding-top: 14px;
- }
- .btn-next{
-  align-self: center;
- 
+  align-items: center; /* Removed justify-items and padding-top */
+}
+
+.btn-next {
   font-size: 1.6rem;
-  box-shadow: 3px 3px #efefef ;
-  border: 3px solid #efefef ;
+  box-shadow: 3px 3px #efefef;
+  border: 3px solid #efefef;
   padding: 14px;
   font-weight: 900;
+  margin-top: 1rem;
   color: #213547;
-  
-  transition: all 1s;
- }
+  transition: all 0.2s; /* Reduced transition time for quicker button response */
+}
 
- .verses{
+.verses {
   background-color: #efefef;
   border-radius: 12px;
-  align-self: last baseline;
   padding: 6px;
- }
+}
 
- .btn-next:active{
-  box-shadow: 0px solid #ffffff;
-  transform: translateX(3px);
-  transform: translateY(3px);
- }
+.btn-next:active {
+  transform: translate(3px, 3px); /* Combined translateX and translateY into one */
+  box-shadow: none; /* Removed shadow on button click */
+}
 
- h4 {
+h4 {
   font-size: 1rem;
-  padding: 0px;
-  margin: 0px;
- }
- .content{
-  display: flex; justify-content: center;
-  text-align: center;
-  flex-direction: column;
+  padding: 0;
+  margin: 0;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
   align-items: center;
- }
-.partions{
+  flex-direction: column;
+  text-align: center;
+}
+
+.partions {
   border-radius: 22px;
   background-color: rgb(246, 244, 244);
-  padding-left: 4rem;
-  padding-right: 4rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding: 1rem 4rem; /* Combined padding properties */
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
-

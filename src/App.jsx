@@ -89,7 +89,7 @@ function Home() {
           // Assuming setChapCount and setCount are functions to update chapCount and count
           
         } else if (error && error.status === 503) {
-          alert('Service Unavailable'); // Show alert for "Service Unavailable"
+          alert('Api is Down, Try again later...'); // Show alert for "Service Unavailable"
         } else {
            // Handle other errors
            setChapCount(prevChapCount => prevChapCount + 1); // Increment chapCount
