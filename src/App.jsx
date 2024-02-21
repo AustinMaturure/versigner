@@ -184,6 +184,7 @@
               // Handle other errors
               setChapCount((prevChapCount) => prevChapCount + 1); // Increment chapCount
               setCount(1); // Reset count to 1
+              alert('Fetching Next Book...');
             }
           });
       }, [apiUrl, apiKey, chapCount, count]);

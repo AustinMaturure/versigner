@@ -59,7 +59,7 @@
   border-radius: 22px;
   background-color: rgb(246, 244, 244);
   padding: 1rem 4rem; 
-  box-shadow: 2px 2px 5px #cccfd1;
+  box-shadow: 1px 1px 5px #cccfd1;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
