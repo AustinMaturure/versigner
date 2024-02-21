@@ -37,7 +37,7 @@ function Home() {
    let names = ['Muno', 'B', 'Parthe', 'Mama'];
    console.log(names)
   // Check if the difference in weeks is a whole number
-  const [count, setCount] = useState(0); // Initialize count to 1
+  const [count, setCount] = useState(18); // Initialize count to 1
 
   useEffect(() => {
     if (differenceInMilliseconds % (7 * 24 * 60 * 60 * 1000) >= 0) {
@@ -50,8 +50,12 @@ function Home() {
  
   const apiKey = '818d9b2a9c99e0f59389bd3de8abc0b4'; // Replace with your actual API key
   const bibleId = '7142879509583d59-01'; // Replace with the ID of the bible you want to fetch
+  
+  // Assuming chapCount and count are state variables
   const apiUrl = `https://api.scripture.api.bible/v1/bibles/${bibleId}/chapters/${bibleBooksAbbreviations[chapCount]}.${count}`;
+  
   let countSetSuccessful = false;
+  
   useEffect(() => {
     fetch(apiUrl, {
       headers: {
@@ -71,18 +75,20 @@ function Home() {
       })
       .catch(error => {
         console.error('Error fetching bible:', error);
-        if (error.response && error.response.status === 400) {
-          const nextChapter = error.response.data.next;
-          if (nextChapter === 0) {
-            setChapCount(prevChapCount => prevChapCount + 1); // Increment chapCount
-          } else {
-            setCount(1); // Reset count to 0
-          }
-        } else if (error.response && error.response.status === 503) {
-         alert('loading')
+        // Check if error.status exists and handle accordingly
+        if ( error.code === 400) {
+          // Assuming setChapCount and setCount are functions to update chapCount and count
+          
+        } else if (error && error.status === 503) {
+          alert('Service Unavailable'); // Show alert for "Service Unavailable"
+        } else {
+           // Handle other errors
+           setChapCount(prevChapCount => prevChapCount + 1); // Increment chapCount
+          setCount(1); // Reset count to 1
+          alert('An errorc big occurred')
         }
       }); 
-  }, [apiUrl, apiKey]);  
+  }, [apiUrl, apiKey, chapCount, count]);
 
   
 
