@@ -19,7 +19,7 @@ function Home() {
 
   const handleAddSevenDays = () => {
     const newDate = new Date(currentDate);
-    newDate.setDate(newDate.getDate() + 6);
+    newDate.setDate(newDate.getDate() + 7);
     setCurrentDate(newDate);
     console.log('button pressed')
   };
@@ -30,7 +30,6 @@ function Home() {
   
   // Convert milliseconds to weeks (1 week = 7 days = 7 * 24 * 60 * 60 * 1000 milliseconds)
   const differenceInWeeks = Math.floor(differenceInMilliseconds / (7 * 24 * 60 * 60 * 1000));
-  let newcount = 1
   
   
    const [bible, setBible] = useState(null);
@@ -38,7 +37,7 @@ function Home() {
    let names = ['Muno', 'B', 'Parthe', 'Mama'];
    console.log(names)
   // Check if the difference in weeks is a whole number
-  const [count, setCount] = useState(1); // Initialize count to 1
+  const [count, setCount] = useState(0); // Initialize count to 1
 
   useEffect(() => {
     if (differenceInMilliseconds % (7 * 24 * 60 * 60 * 1000) >= 0) {
