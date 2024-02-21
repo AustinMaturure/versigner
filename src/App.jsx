@@ -84,7 +84,7 @@
         "JUD",
         "REV",
       ];
-      const [names, setNames] = useState(["Mama", "B", "Parthe", "Muno"]);
+      const [names, setNames] = useState(["B", "Mama",  "Parthe", "Muno"]);
       const [week, setWeek] = useState("This");
       const [cweek, setcWeek] = useState(1);
       let it = new Date();
