@@ -8,7 +8,6 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  
 }
 
 .btn-div {
@@ -35,7 +34,10 @@
 }
 
 .btn-next:active {
-  transform: translate(3px, 3px); /* Combined translateX and translateY into one */
+  transform: translate(
+    3px,
+    3px
+  ); /* Combined translateX and translateY into one */
   box-shadow: none; /* Removed shadow on button click */
 }
 
