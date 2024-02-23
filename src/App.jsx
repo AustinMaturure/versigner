@@ -181,11 +181,8 @@
               console.error("Undefined error occurred");
               return; // Exit the function if error is undefined
             }
-    
-            console.error("Error fetching bible:", error);
-            setErrorMessage(`Error fetching bible books, Api is down please let me now`);
             // Check if error.status or error.code exists and handle accordingly
-            if (error instanceof TypeError && error.message === "Failed to fetch") {
+            else if (error instanceof TypeError && error.message === "Failed to fetch") {
               console.error("Fetch failed. Check your network connection or the URL being fetched.");
               setErrorMessage(`Server error, please check your Network or Api might be down`);
             } else if (error instanceof Response && error.status >= 500 && error.status < 600) {
@@ -195,6 +192,7 @@
               setErrorMessage(`Fetching new book please wait...`);
               setChapCount((prevChapCount) => prevChapCount + 1); // Increment chapCount
               setCount(1); // Reset count to 1
+              setErrorMessage(null)
               
             }
         });
