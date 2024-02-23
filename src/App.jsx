@@ -10,6 +10,7 @@
         }
         return rotatedArray;
       }
+      const [errorMessage, setErrorMessage] = useState(null);
 
       const [initialDate, setInitialDate] = useState(
         new Date("Tue Feb 20 2024 09:34:08 GMT-0800"),
@@ -89,6 +90,7 @@
       const [cweek, setcWeek] = useState(1);
       let it = new Date();
       const handleAddSevenDays = () => {
+        setErrorMessage(null);
         const newDate = new Date(currentDate);
         newDate.setDate(newDate.getDate() + 7);
         setCurrentDate(newDate);
@@ -157,6 +159,7 @@
       const apiUrl = `https://api.scripture.api.bible/v1/bibles/${bibleId}/chapters/${bibleBooksAbbreviations[chapCount]}.${count}`;
 
       useEffect(() => {
+        setErrorMessage(null)
         fetch(apiUrl, {
           headers: {
             "api-key": apiKey,
@@ -174,19 +177,27 @@
             setBible(data.data);
           })
           .catch((error) => {
+            if (error === undefined) {
+              console.error("Undefined error occurred");
+              return; // Exit the function if error is undefined
+            }
+    
             console.error("Error fetching bible:", error);
-            // Check if error.status exists and handle accordingly
-            if (error.code === 400) {
-              // Assuming setChapCount and setCount are functions to update chapCount and count
-            } else if (error && error.status === 503) {
-              alert("Api is Down, Try again later..."); // Show alert for "Service Unavailable"
+            setErrorMessage(`Error fetching bible books, Api is down please let me now`);
+            // Check if error.status or error.code exists and handle accordingly
+            if (error instanceof TypeError && error.message === "Failed to fetch") {
+              console.error("Fetch failed. Check your network connection or the URL being fetched.");
+              setErrorMessage(`Server error, please check your Network or Api might be down`);
+            } else if (error instanceof Response && error.status >= 500 && error.status < 600) {
+              setErrorMessage(`Server error: ${error.status}`); // Set error message state
             } else {
               // Handle other errors
+              setErrorMessage(`Fetching new book please wait...`);
               setChapCount((prevChapCount) => prevChapCount + 1); // Increment chapCount
               setCount(1); // Reset count to 1
-              alert('Fetching Next Book...');
+              
             }
-          });
+        });
       }, [apiUrl, apiKey, chapCount, count]);
 
       useEffect(() => {
@@ -283,7 +294,9 @@
                       day: "numeric",
                     })}
                   </h2>
+                  {errorMessage && <p className="error">{errorMessage}</p>}
                   <h1>{bible.reference}</h1>
+                  
                 </div>
 
                 <div className="partions">

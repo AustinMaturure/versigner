@@ -41,6 +41,12 @@
   box-shadow: none; 
 }
 
+.error {
+  font-size: 1rem;
+   color: #FF3547;
+  ;
+}
+
 .week {
   font-size: 1rem;
   padding: 0;
