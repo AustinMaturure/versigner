@@ -152,7 +152,7 @@
 
       console.log("Count is:", count);
 
-      const apiKey = "818d9b2a9c99e0f59389bd3de8abc0b4"; // Replace with your actual API key
+      const apiKey = '818d9b2a9c99e0f59389bd3de8abc0b4'; // Replace with your actual API key
       const bibleId = "7142879509583d59-01"; // Replace with the ID of the bible you want to fetch
 
       // Assuming chapCount and count are state variables
@@ -188,7 +188,7 @@
             if (error instanceof TypeError && error.message === "Failed to fetch") {
               
               setErrorMessage('Check your network connection or Api is down, try again later')// Additional handling if necessary
-          }else if (error instanceof Response && error.status >= 500 && error.status < 600) {
+          }else if (error instanceof Response && error.status >= 400 && error.status < 600) {
                 setErrorMessage("Server is Down, Try again later..."); // Show alert for "Service Unavailable"
             } else {
                 // Handle other errors setErrorMessage
