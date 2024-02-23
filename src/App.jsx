@@ -10,7 +10,6 @@
         }
         return rotatedArray;
       }
-      const [errorMessage, setErrorMessage] = useState(null);
 
       const [initialDate, setInitialDate] = useState(
         new Date("Tue Feb 20 2024 09:34:08 GMT-0800"),
@@ -88,9 +87,10 @@
       const [names, setNames] = useState(["B", "Mama",  "Parthe", "Muno"]);
       const [week, setWeek] = useState("This");
       const [cweek, setcWeek] = useState(1);
+      const [errorMessage, setErrorMessage] = useState(null);
+
       let it = new Date();
       const handleAddSevenDays = () => {
-        setErrorMessage(null);
         const newDate = new Date(currentDate);
         newDate.setDate(newDate.getDate() + 7);
         setCurrentDate(newDate);
@@ -159,7 +159,6 @@
       const apiUrl = `https://api.scripture.api.bible/v1/bibles/${bibleId}/chapters/${bibleBooksAbbreviations[chapCount]}.${count}`;
 
       useEffect(() => {
-    
         fetch(apiUrl, {
           headers: {
             "api-key": apiKey,
@@ -175,25 +174,29 @@
             console.log("Bible:", data);
             console.log("content", data.data.content);
             setBible(data.data);
+            setErrorMessage(null);
           })
           .catch((error) => {
             if (error === undefined) {
-              console.error("Undefined error occurred");
-              return; // Exit the function if error is undefined
+                setErrorMessage("Undefined error occurred");
+                
+                return; // Exit the function if error is undefined
             }
+        
+            
             // Check if error.status or error.code exists and handle accordingly
-            else if (error instanceof TypeError && error.message === "Failed to fetch") {
-              console.error("Fetch failed. Check your network connection or the URL being fetched.");
-              setErrorMessage(`Server error, please check your Network or Api might be down`);
-            } else if (error instanceof Response && error.status >= 500 && error.status < 600) {
-              setErrorMessage(`Server error: ${error.status}`); // Set error message state
-            } else {
-              // Handle other errors
-              setErrorMessage(`Fetching new book please wait...`);
-              setChapCount((prevChapCount) => prevChapCount + 1); // Increment chapCount
-              setCount(1); // Reset count to 1
-              setErrorMessage(null)
+            if (error instanceof TypeError && error.message === "Failed to fetch") {
               
+              setErrorMessage('Check your network connection or Api is down, try again later')// Additional handling if necessary
+          }else if (error instanceof Response && error.status >= 500 && error.status < 600) {
+                setErrorMessage("Server is Down, Try again later..."); // Show alert for "Service Unavailable"
+            } else {
+                // Handle other errors setErrorMessage
+                
+                
+                setChapCount((prevChapCount) => prevChapCount + 1); // Increment chapCount
+                setCount(1); // Reset count to 1
+                setErrorMessage(`Fetching new book please wait...`);
             }
         });
       }, [apiUrl, apiKey, chapCount, count]);
@@ -294,7 +297,6 @@
                   </h2>
                   {errorMessage && <p className="error">{errorMessage}</p>}
                   <h1>{bible.reference}</h1>
-                  
                 </div>
 
                 <div className="partions">
