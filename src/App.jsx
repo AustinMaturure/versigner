@@ -159,7 +159,7 @@
       const apiUrl = `https://api.scripture.api.bible/v1/bibles/${bibleId}/chapters/${bibleBooksAbbreviations[chapCount]}.${count}`;
 
       useEffect(() => {
-        setErrorMessage(null)
+    
         fetch(apiUrl, {
           headers: {
             "api-key": apiKey,
