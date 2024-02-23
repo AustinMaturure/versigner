@@ -196,7 +196,7 @@
                 
                 setChapCount((prevChapCount) => prevChapCount + 1); // Increment chapCount
                 setCount(1); // Reset count to 1
-                setErrorMessage(`Fetching new book please wait...`);
+                setErrorMessage(`Fetching new book please wait... if messages appears for more than 4 seconds check Network and reload.`);
             }
         });
       }, [apiUrl, apiKey, chapCount, count]);
