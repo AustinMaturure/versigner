@@ -2,7 +2,7 @@
     import "./home.css";
 
     function Home() {
-      function rotateArray(arr, count) {
+      function rotateArray(arr, count ) {
         const rotatedArray = [...arr];
         for (let i = 0; i < count; i++) {
           const lastElement = rotatedArray.pop();
@@ -11,6 +11,7 @@
         return rotatedArray;
       }
 
+      
       const [initialDate, setInitialDate] = useState(
         new Date("Tue Feb 20 2024 09:34:08 GMT-0800"),
       );
@@ -84,7 +85,7 @@
         "JUD",
         "REV",
       ];
-      const [names, setNames] = useState(["B", "Mama",  "Parthe", "Muno"]);
+      
       const [week, setWeek] = useState("This");
       const [cweek, setcWeek] = useState(1);
       const [errorMessage, setErrorMessage] = useState(null);
@@ -133,6 +134,7 @@
       const differenceInWeeks = Math.floor(
         differenceInMilliseconds / (7 * 24 * 60 * 60 * 1000),
       );
+      const [names, setNames] = useState(rotateArray(["B", "Mama",  "Parthe", "Muno"], differenceInWeeks));
       console.log("Difference in weeks:", differenceInWeeks);
 
       const [bible, setBible] = useState(null);
@@ -140,6 +142,8 @@
       let [chapCount, setChapCount] = useState(
         parseInt(import.meta.env.VITE_CHAPCOUNT),
       );
+
+      
 
       console.log(names);
       // Check if the difference in weeks is a whole number
