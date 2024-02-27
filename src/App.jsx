@@ -100,7 +100,7 @@
         const nextWeekDate = new Date(currentDate);
         nextWeekDate.setDate(nextWeekDate.getDate() + 7);
         const daysUntilTuesday = (9 - nextWeekDate.getDay()) % 7;
-        nextWeekDate.setDate(nextWeekDate.getDate() + daysUntilTuesday);
+        nextWeekDate.setDate(nextWeekDate.getDate() );
 
         // Update the initial date to the Tuesday of the next week
         setInitialDate(nextWeekDate);
