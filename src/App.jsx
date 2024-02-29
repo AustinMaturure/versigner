@@ -15,7 +15,15 @@
       const [initialDate, setInitialDate] = useState(
         new Date("Tue Feb 20 2024 09:34:08 GMT-0800"),
       );
-      const [currentDate, setCurrentDate] = useState(new Date());
+     
+      const nextWeekDate = new Date();
+      nextWeekDate.setDate(nextWeekDate.getDate() );
+      const daysUntilTuesday = (7 - nextWeekDate.getDay() + 2) % 7; // Adding 2 to account for shifting Tuesday
+      nextWeekDate.setDate(nextWeekDate.getDate() + daysUntilTuesday);
+      
+      // Update the initial date to the Tuesday of the next week
+      const [currentDate, setCurrentDate] = useState(nextWeekDate);
+      
 
       const bibleBooksAbbreviations = [
         "GEN",
@@ -99,8 +107,8 @@
         // Find the Tuesday of the next week
         const nextWeekDate = new Date(currentDate);
         nextWeekDate.setDate(nextWeekDate.getDate() + 7);
-        const daysUntilTuesday = (9 - nextWeekDate.getDay()) % 7;
-        nextWeekDate.setDate(nextWeekDate.getDate() );
+        const daysUntilTuesday = (7 - nextWeekDate.getDay()) % 7;
+        nextWeekDate.setDate(currentDate + daysUntilTuesday);
 
         // Update the initial date to the Tuesday of the next week
         setInitialDate(nextWeekDate);
