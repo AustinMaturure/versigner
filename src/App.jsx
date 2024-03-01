@@ -155,7 +155,7 @@
 
       console.log(names);
       // Check if the difference in weeks is a whole number
-      const [count, setCount] = useState(18 + differenceInWeeks);
+      const [count, setCount] = useState(17 + differenceInWeeks);
 
       useEffect(() => {
         // Your logic that depends on the count value
@@ -178,7 +178,9 @@
         })
           .then((response) => {
             if (!response.ok) {
+              setErrorMessage(`Problem Fetching Data... if messages appears for more than 4 seconds check Network and reload.`)
               throw new Error("Network response was not ok");
+              
             }
             return response.json();
           })
