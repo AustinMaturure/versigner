@@ -129,7 +129,7 @@
         
         setCount((prevCount) => prevCount + 1);
 
-        const rotatedNames = rotateArray(names, 1); // Rotate names array by 4 positions
+        const rotatedNames = rotateArray(names, differenceInWeeks); // Rotate names array by 4 positions
         setNames(rotatedNames); // Update names array with rotated names
         console.log(rotatedNames);
       };
