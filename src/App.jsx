@@ -13,7 +13,7 @@
 
       
       const [initialDate, setInitialDate] = useState(
-        new Date("Tue Feb 20 2024 09:34:08 GMT-0800"),
+        new Date("Tue Feb 20 2024 23:59:99 GMT-0800"),
       );
      
       const nextWeekDate = new Date();
@@ -129,7 +129,7 @@
         
         setCount((prevCount) => prevCount + 1);
 
-        const rotatedNames = rotateArray(names, differenceInWeeks); // Rotate names array by 4 positions
+        const rotatedNames = rotateArray(names, 1); // Rotate names array by 4 positions
         setNames(rotatedNames); // Update names array with rotated names
         console.log(rotatedNames);
       };
@@ -155,7 +155,7 @@
 
       console.log(names);
       // Check if the difference in weeks is a whole number
-      const [count, setCount] = useState(17 + differenceInWeeks);
+      const [count, setCount] = useState(18 + differenceInWeeks);
 
       useEffect(() => {
         // Your logic that depends on the count value
