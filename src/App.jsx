@@ -13,7 +13,7 @@
 
       
       const [initialDate, setInitialDate] = useState(
-        new Date("Tue Feb 20 2024 23:59:99 GMT-0800"),
+        new Date("Tue Feb 20 2024 23:59:08 GMT+0200"),
       );
      
       const nextWeekDate = new Date();
@@ -100,7 +100,9 @@
 
       let it = new Date();
       const handleAddSevenDays = () => {
-        const newDate = new Date(currentDate);
+        
+
+        const newDate = new Date(currentDate.getTime() );
         newDate.setDate(newDate.getDate() + 7);
         setCurrentDate(newDate);
 
@@ -202,8 +204,10 @@
             if (error instanceof TypeError && error.message === "Failed to fetch") {
               
               setErrorMessage('Check your network connection or Api is down, try again later')// Additional handling if necessary
+              return;
           }else if (error instanceof Response && error.status >= 400 && error.status < 600) {
-                setErrorMessage("Server is Down, Try again later..."); // Show alert for "Service Unavailable"
+                setErrorMessage("Server is Down, Try again later..."); 
+                return;// Show alert for "Service Unavailable"
             } else {
                 // Handle other errors setErrorMessage
                 
@@ -302,7 +306,7 @@
                 <div className="titles">
                   <h2>
                     <p className="week">{week} Weeks</p>
-                    {currentDate.toLocaleString("en-US", {
+                    {currentDate.toLocaleString("en-Za", {
                       weekday: "long",
                       year: "numeric",
                       month: "long",
