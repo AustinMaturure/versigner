@@ -11,42 +11,46 @@ function Home() {
     return rotatedArray;
 }
 
-  const initialDate = new Date('Tue Feb 20 2024 09:34:08 GMT-0800');
+  const [initialDate, setInitialDate] = useState(new Date('Tue Feb 20 2024 09:34:08 GMT-0800'));
   const [currentDate, setCurrentDate] = useState(new Date());
+
+
   const bibleBooksAbbreviations = [
     "GEN", "EXO", "LEV", "NUM", "DEU", "JOS", "JDG", "RUT", "1SA", "2SA", "1KI", "2KI", "1CH", "2CH", "EZR", "NEH", "EST", "JOB", "PSA", "PRO", "ECC", "SON", "ISA", "JER", "LAM", "EZE", "DAN", "HOS", "JOE", "AMO", "OBA", "JON", "MIC", "NAH", "HAB", "ZEP", "HAG", "ZEC", "MAL", "MAT", "MAR", "LUK", "JOH", "ACT", "ROM", "1CO", "2CO", "GAL", "EPH", "PHI", "COL", "1TH", "2TH", "1TI", "2TI", "TIT", "PHM", "HEB", "JAM", "1PE", "2PE", "1JO", "2JO", "3JO", "JUD", "REV"
   ];
   const [names, setNames] = useState(['Muno', 'B', 'Parthe', 'Mama']);
   const [week, setWeek] = useState('Next')
   const [cweek, setcWeek] = useState(2)
+
   const handleAddSevenDays = () => {
     const newDate = new Date(currentDate);
-    newDate.setDate(newDate.getDate() + 7);
-    
-    setCurrentDate(newDate);
-    console.log('button pressed');
-
-    const nextWeekDate = new Date(currentDate);
+  newDate.setDate(newDate.getDate() + 7);
+  setCurrentDate(newDate);
+  
+  // Find the Tuesday of the next week
+  const nextWeekDate = new Date(currentDate);
   nextWeekDate.setDate(nextWeekDate.getDate() + 7);
+  const daysUntilTuesday = (9 - nextWeekDate.getDay()) % 7;
+  nextWeekDate.setDate(nextWeekDate.getDate() + daysUntilTuesday);
 
-  // Calculate the difference in days between current date and next week's date
+  // Update the initial date to the Tuesday of the next week
+  setInitialDate(nextWeekDate);
+
+  // Update the week label based on the difference in days
   const differenceInDays = Math.floor((nextWeekDate - new Date()) / (1000 * 60 * 60 * 24));
-
-  // Set week based on difference in days
   if (differenceInDays <= 2) {
     setWeek('This');
   } else {
     setWeek('In (' + cweek +")");
   }
-    
-    setcWeek(previous => previous + 1)
-    setWeek('In (' + cweek +")")
 
-    setCount(prevCount => prevCount + 1);
-    
-    const rotatedNames = rotateArray(names, 1); // Rotate names array by 4 positions
-    setNames(rotatedNames); // Update names array with rotated names
-    console.log(rotatedNames);
+  setcWeek(previous => previous + 1);
+  setWeek('In (' + cweek +")");
+  setCount(prevCount => prevCount + 1);
+  
+  const rotatedNames = rotateArray(names, 1); // Rotate names array by 4 positions
+  setNames(rotatedNames); // Update names array with rotated names
+  console.log(rotatedNames);
   };
 
  
@@ -55,14 +59,16 @@ function Home() {
   
   // Convert milliseconds to weeks (1 week = 7 days = 7 * 24 * 60 * 60 * 1000 milliseconds)
   const differenceInWeeks = Math.floor(differenceInMilliseconds / (7 * 24 * 60 * 60 * 1000));
+  console.log("Difference in weeks:", differenceInWeeks);
   
   
    const [bible, setBible] = useState(null);
+  
    let [chapCount, setChapCount] = useState(parseInt(import.meta.env.VITE_CHAPCOUNT));
   
    console.log(names)
   // Check if the difference in weeks is a whole number
-  const [count, setCount] = useState(18); 
+  const [count, setCount] = useState(18 + differenceInWeeks); 
 
   useEffect(() => {
     // Your logic that depends on the count value
@@ -109,7 +115,7 @@ function Home() {
            // Handle other errors
            setChapCount(prevChapCount => prevChapCount + 1); // Increment chapCount
           setCount(1); // Reset count to 1
-          alert('Fetching Next Book ...')
+      
         }
       }); 
   }, [apiUrl, apiKey, chapCount, count]);
