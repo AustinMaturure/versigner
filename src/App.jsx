@@ -127,7 +127,7 @@
         const differenceInDays = Math.floor(
           (nextWeekDate - new Date()) / (1000 * 60 * 60 * 24),
         );
-        if (jump = -1){
+        if (jump === -1){
           setWeek("Last")
           if (differenceInWeeks != 0) {
             setWeek(cweek + " ");
@@ -139,7 +139,6 @@
         setWeek("In " + cweek + " ");
         } 
         }
-        
           
         
 
