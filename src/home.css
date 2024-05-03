@@ -14,13 +14,14 @@
   display: flex;
   justify-content: center;
   align-items: center; 
+  gap: 5%;
 }
 
 .btn-next {
   font-size: 1.6rem;
   box-shadow: 3px 3px #efefef;
   border: 3px solid #efefef;
-  padding: 14px;
+  padding: 10px;
   font-weight: 900;
   margin-top: 1rem;
   color: #213547;

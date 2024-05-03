@@ -2,14 +2,21 @@
     import "./home.css";
 
     function Home() {
-      function rotateArray(arr, count ) {
+      const rotateArray = (arr, count) => {
         const rotatedArray = [...arr];
-        for (let i = 0; i < count; i++) {
-          const lastElement = rotatedArray.pop();
-          rotatedArray.unshift(lastElement);
+        for (let i = 0; i < Math.abs(count); i++) {
+          if (count > 0) {
+            // Rotate array to the right
+            const lastElement = rotatedArray.pop();
+            rotatedArray.unshift(lastElement);
+          } else {
+            // Rotate array to the left
+            const firstElement = rotatedArray.shift();
+            rotatedArray.push(firstElement);
+          }
         }
         return rotatedArray;
-      }
+      };
 
       
       const [initialDate, setInitialDate] = useState(
@@ -99,17 +106,17 @@
       const [errorMessage, setErrorMessage] = useState(null);
 
       let it = new Date();
-      const handleAddSevenDays = () => {
+      const handleSevenDays = (number, jump) => {
         
 
         const newDate = new Date(currentDate.getTime() );
-        newDate.setDate(newDate.getDate() + 7);
+        newDate.setDate(newDate.getDate() + number);
         setCurrentDate(newDate);
 
         // Find the Tuesday of the next week
         const nextWeekDate = new Date(currentDate);
         nextWeekDate.setDate(nextWeekDate.getDate() + 7);
-        const daysUntilTuesday = (7 - nextWeekDate.getDay()) % 7;
+        const daysUntilTuesday = (number - nextWeekDate.getDay()) % 7;
         nextWeekDate.setDate(currentDate + daysUntilTuesday);
 
         // Update the initial date to the Tuesday of the next week
@@ -120,18 +127,27 @@
         const differenceInDays = Math.floor(
           (nextWeekDate - new Date()) / (1000 * 60 * 60 * 24),
         );
-        setWeek("Next");
+        if (jump = -1){
+          setWeek("Last")
+          if (differenceInWeeks != 0) {
+            setWeek(cweek + " ");
+            } 
+        } 
+        else {
+          setWeek("Next");
         if (differenceInWeeks != 0) {
         setWeek("In " + cweek + " ");
         } 
+        }
+        
           
         
 
-        setcWeek((previous) => previous + 1);
+        setcWeek((previous) => previous + jump);
         
-        setCount((prevCount) => prevCount + 1);
+        setCount((prevCount) => prevCount + jump);
 
-        const rotatedNames = rotateArray(names, 1); // Rotate names array by 4 positions
+        const rotatedNames = rotateArray(names, jump); // Rotate names array by 4 positions
         setNames(rotatedNames); // Update names array with rotated names
         console.log(rotatedNames);
       };
@@ -332,10 +348,14 @@
                   ))}
                 </div>
               </div>
-              <div className="btn-div">
-                <button className="btn-next" onClick={handleAddSevenDays}>
-                  Next Week
+              <div className="btn-div"> 
+               <button className="btn-next" onClick={() => handleSevenDays(-7, -1)}>
+                  {`Prev Week`}
                 </button>
+                <button className="btn-next" onClick={() => handleSevenDays(7, 1)}>
+                {`Next Week`}
+                </button>
+              
               </div>
             </section>
           )}
