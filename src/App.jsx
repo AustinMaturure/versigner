@@ -19,7 +19,7 @@ function Home() {
   };
 
   const [initialDate, setInitialDate] = useState(
-    new Date("Tue Oct 24 2024 23:59:08 GMT+0200")
+    new Date("Tue Nov 12 2024 23:59:08 GMT+0200")
   );
 
   const nextWeekDate = new Date();
@@ -165,13 +165,13 @@ function Home() {
 
   console.log(names);
   // Check if the difference in weeks is a whole number
-  const [count, setCount] = useState(18 + differenceInWeeks);
+  const [count, setCount] = useState(
+    parseInt(import.meta.env.VITE_COUNT) + differenceInWeeks
+  );
 
   useEffect(() => {
     console.log("Count is:", count);
   }, [count]);
-
-  console.log("Count is:", count);
 
   const apiKey = "818d9b2a9c99e0f59389bd3de8abc0b4";
   const bibleId = "7142879509583d59-01";
