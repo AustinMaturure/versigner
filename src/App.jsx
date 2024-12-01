@@ -19,7 +19,7 @@ function Home() {
   };
 
   const [initialDate, setInitialDate] = useState(
-    new Date("Tue Nov 12 2024 23:59:08 GMT+0200")
+    new Date("Tue Nov 25 2024 23:59:08 GMT+0200")
   );
 
   const nextWeekDate = new Date();
@@ -176,7 +176,7 @@ function Home() {
   const apiKey = "818d9b2a9c99e0f59389bd3de8abc0b4";
   const bibleId = "7142879509583d59-01";
 
-  const apiUrl = `https://api.scripture.api.bible/v1/bibles/${bibleId}/chapters/${bibleBooksAbbreviations[24]}.${count}`;
+  const apiUrl = `https://api.scripture.api.bible/v1/bibles/${bibleId}/chapters/${bibleBooksAbbreviations[chapCount]}.${count}`;
 
   useEffect(() => {
     fetch(apiUrl, {
@@ -194,8 +194,6 @@ function Home() {
         return response.json();
       })
       .then((data) => {
-        console.log("Bible:", data);
-        console.log("content", data.data.content);
         setBible(data.data);
         setErrorMessage(null);
       })
