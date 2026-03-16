@@ -31,6 +31,7 @@ body {
   min-height: 100vh;
   min-height: 100svh;
   overflow-x: hidden;
+  
 }
 
 .person {
@@ -41,8 +42,8 @@ body {
   align-items: center;
   justify-content: space-evenly;
   gap: 10px;
-  border-radius: 12px;
-  box-shadow: -2px 2px #d3d3d3;
+  border-radius: 22px;
+  box-shadow:  2px #d3d3d3;
   padding: 6px;
 }
 
@@ -61,7 +62,7 @@ h2 {
 }
 
 button {
-  border-radius: 8px;
+  border-radius: 12px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
