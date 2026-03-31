@@ -1,70 +1,279 @@
-#root {
-  max-width: 1280px;
-  padding: 1rem;
-  text-align: center;
-}
+/* ═══════════════════════════════════════════════════
+   Versigner · home.css
+   iOS-inspired schedule layout · existing palette
+═══════════════════════════════════════════════════ */
 
-.main {
+/* ── Container ──────────────────────────────────── */
+
+.app-container {
+  max-width: 420px;
+  width: 100%;
+  padding: 2.5rem 1.75rem 2rem;
   display: flex;
   flex-direction: column;
-  text-align: center;
+  font-family: "Author", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
-.btn-div {
+/* ── Header ─────────────────────────────────────── */
+
+.app-header {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5%;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.25rem;
 }
 
-.btn-next {
-  font-size: 1.6rem;
-  box-shadow: 3px 3px #efefef;
-  border: 3px solid #efefef;
-  padding: 10px;
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.book-title {
   font-weight: 900;
-  margin-top: 1rem;
+  line-height: 1;
   color: #213547;
-  transition: all 0.2s;
+  margin: 0;
+  letter-spacing: -0.03em;
+  /* font-size is set inline based on name length */
 }
 
-.verses {
-  background-color: #cccfd14b;
-  border-radius: 12px;
-  padding: 6px;
+.today-dot {
+  color: #ff5436;
+  margin-left: 3px;
 }
 
-.btn-next:active {
-  transform: translate(3px, 3px);
-  box-shadow: none;
+.other-dot {
+  color: #646cff;
+  margin-left: 3px;
 }
 
-.error {
+.week-label {
+  font-size: 0.72rem;
+  color: #8fa3b0;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.header-meta {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.chapter-label {
   font-size: 1rem;
-  color: #ff3547;
-}
-
-.week {
-  font-size: 1rem;
-  padding: 0;
+  font-weight: 600;
+  color: #213547;
   margin: 0;
 }
 
-.content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
+.year-label {
+  font-size: 1rem;
+  color: #8fa3b0;
+  margin: 0;
+  font-weight: 400;
 }
 
-.partions {
-  border-radius: 22px;
-  background-color: rgb(246, 244, 244);
-  padding: 1rem 4rem;
-  box-shadow: 1px 1px 5px #cccfd1;
-  box-sizing: border-box;
+/* ── Tuesday Slider ──────────────────────────────── */
+
+.tuesday-slider {
+  display: flex;
+  gap: 2px;
+  overflow-x: auto;
+  padding: 4px 0 10px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.tuesday-slider::-webkit-scrollbar {
+  display: none;
+}
+
+.slider-item {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  align-items: center;
+  gap: 2px;
+  min-width: 46px;
+  flex-shrink: 0;
+  padding: 5px 3px;
+  border-radius: 16px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  scroll-snap-align: center;
+  transition: background 0.15s ease;
+  font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.s-month {
+  font-size: 0.58rem;
+  color: #a0b4c0;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.s-day {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #213547;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  line-height: 1;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.s-tue {
+  font-size: 0.56rem;
+  color: #a0b4c0;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+
+/* Selected state */
+.slider-item--active .s-day {
+  background-color: #213547;
+  color: #ffffff;
+}
+
+.slider-item--active .s-month,
+.slider-item--active .s-tue {
+  color: #213547;
+  font-weight: 800;
+}
+
+/* This week (today) indicator when not selected */
+.slider-item--today .s-day {
+  color: #ff5436;
+}
+
+/* ── Dotted Divider ──────────────────────────────── */
+
+.dotted-line {
+  width: 100%;
+  height: 1px;
+  background-image: radial-gradient(circle, #c8d2d8 1.5px, transparent 1.5px);
+  background-size: 8px 1px;
+  background-repeat: repeat-x;
+  flex-shrink: 0;
+  margin: 0;
+}
+
+/* ── Reading List ────────────────────────────────── */
+
+.reading-list {
+  display: flex;
+  flex-direction: column;
+  padding: 2px 0;
+}
+
+.reading-item {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 13px 2px;
+}
+
+.reading-icon {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f2f5;
+  border-radius: 10px;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.reading-name {
+  flex: 1;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #213547;
+  margin: 0;
+}
+
+.reading-range {
+  font-size: 0.95rem;
+  color: #8fa3b0;
+  font-weight: 500;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
+/* ── Skeleton Loading ────────────────────────────── */
+
+.skeleton-pill {
+  display: inline-block;
+  width: 52px;
+  height: 14px;
+  background: linear-gradient(
+    90deg,
+    #e5eaed 25%,
+    #f2f5f7 50%,
+    #e5eaed 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite ease-in-out;
+  border-radius: 7px;
+  vertical-align: middle;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Error ───────────────────────────────────────── */
+
+.error-msg {
+  font-size: 0.875rem;
+  color: #ff3547;
+  text-align: center;
+  padding: 0.875rem 0;
+  margin: 0;
+}
+
+/* ── Navigation Buttons ──────────────────────────── */
+
+.nav-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding-top: 1.375rem;
+}
+
+.btn-nav {
+  font-size: 0.95rem;
+  font-weight: 800;
+  padding: 10px 22px;
+  border-radius: 14px;
+  border: 2.5px solid #dde3e8;
+  background-color: #f7f9fb;
+  color: #213547;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: 3px 3px 0 #dde3e8;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  line-height: 1;
+}
+
+.btn-nav:active {
+  transform: translate(3px, 3px);
+  box-shadow: none;
 }
