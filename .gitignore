@@ -39,3 +39,4 @@ sketch
 
 # Local Netlify folder
 .netlify
+.env
