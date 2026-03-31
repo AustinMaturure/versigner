@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo } from "react";
 import "./home.css";
 
 const BIBLE_BOOKS = [
@@ -222,9 +222,9 @@ export default function App() {
 
  
   const titleFontSize =
-    book.name.length > 13 ? "1.55rem" :
-    book.name.length > 9  ? "2rem" :
-    "2.6rem";
+    book.name.length > 13 ? "1.9rem" :
+    book.name.length > 9  ? "2.5rem" :
+    "3.2rem";
 
   
   return (
@@ -285,7 +285,7 @@ export default function App() {
       {/* ── Reading List ── */}
       <div className="reading-list">
         {members.map((name, i) => (
-          <React.Fragment key={name}>
+          <div key={name}>
             <div className="reading-item">
               <span className="reading-icon">{MEMBER_ICONS[name]}</span>
               <span className="reading-name">{name}</span>
@@ -300,7 +300,7 @@ export default function App() {
               </span>
             </div>
             {i < members.length - 1 && <div className="dotted-line" />}
-          </React.Fragment>
+          </div>
         ))}
       </div>
 

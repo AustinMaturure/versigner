@@ -6,9 +6,9 @@
 /* ── Container ──────────────────────────────────── */
 
 .app-container {
-  max-width: 480px;
+  max-width: 500px;
   width: 100%;
-  padding: 1rem 1rem 1rem;
+  padding: 3rem 2.5rem 2.5rem;
   display: flex;
   flex-direction: column;
   font-family: "Author", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -209,12 +209,15 @@
 }
 
 .reading-range {
-  font-size: 1.05rem;
-  color: #8fa3b0;
-  font-weight: 500;
+  font-size: 1rem;
+  color: #213547;
+  font-weight: 600;
   white-space: nowrap;
   display: flex;
   align-items: center;
+  background-color: #e8ecf0;
+  border-radius: 10px;
+  padding: 5px 12px;
 }
 
 /* ── Skeleton Loading ────────────────────────────── */
