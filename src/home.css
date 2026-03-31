@@ -261,10 +261,8 @@
   display: flex;
   justify-content: space-between;
   gap: 14px;
-  position: absolute;
-  bottom: 16px;
-  left: 1.5rem;
-  right: 1.5rem;
+  padding-top: 18px;
+
 }
 
 .btn-nav {
