@@ -8,7 +8,7 @@
 .app-container {
   max-width: 500px;
   width: 100%;
-  padding: 1.5rem 1.5rem 1.5rem;
+  padding: 3rem 2.5rem 2.5rem;
   display: flex;
   flex-direction: column;
   font-family: "Author", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;

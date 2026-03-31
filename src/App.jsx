@@ -222,9 +222,9 @@ export default function App() {
 
  
   const titleFontSize =
-    book.name.length > 13 ? "1.9rem" :
-    book.name.length > 9  ? "2.5rem" :
-    "3.2rem";
+    book.name.length > 13 ? "1.55rem" :
+    book.name.length > 9  ? "2rem" :
+    "2.6rem";
 
   
   return (
