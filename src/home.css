@@ -12,6 +12,7 @@
   padding: 1.5rem 1.5rem 1.5rem;
   display: flex;
   flex-direction: column;
+  position: relative;
 
   font-family: "Author", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
@@ -203,14 +204,14 @@
 
 .reading-name {
   flex: 1;
-  font-size: 1.15rem;
+  font-size: 1.6rem;
   font-weight: 600;
   color: #213547;
   margin: 0;
 }
 
 .reading-range {
-  font-size: 1rem;
+  font-size: 1.4rem;
   color: #213547;
   font-weight: 600;
   white-space: nowrap;
@@ -258,9 +259,12 @@
 
 .nav-row {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   gap: 14px;
-  padding-top: 1.75rem;
+  position: absolute;
+  bottom: 16px;
+  left: 1.5rem;
+  right: 1.5rem;
 }
 
 .btn-nav {
