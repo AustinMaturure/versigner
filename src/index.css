@@ -20,8 +20,13 @@ body {
   min-height: 100vh;
   min-height: 100svh;
   background-color: #ffffff;
-  padding-top: 2rem;
   box-sizing: border-box;
+}
+
+#root {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 p {

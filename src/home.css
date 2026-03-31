@@ -6,12 +6,13 @@
 /* ── Container ──────────────────────────────────── */
 
 .app-container {
-  max-width: 420px;
+  max-width: 480px;
   width: 100%;
-  padding: 2.5rem 1.75rem 2rem;
+  padding: 3rem 2.25rem 2.5rem;
   display: flex;
   flex-direction: column;
   font-family: "Author", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  margin: 0 auto;
 }
 
 /* ── Header ─────────────────────────────────────── */
@@ -20,7 +21,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.75rem;
 }
 
 .header-left {
@@ -44,7 +45,7 @@
 }
 
 .other-dot {
-  color: #646cff;
+  color: #213547;
   margin-left: 3px;
 }
 
@@ -65,14 +66,14 @@
 }
 
 .chapter-label {
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: #213547;
   margin: 0;
 }
 
 .year-label {
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: #8fa3b0;
   margin: 0;
   font-weight: 400;
@@ -98,11 +99,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
-  min-width: 46px;
+  gap: 3px;
+  min-width: 52px;
   flex-shrink: 0;
-  padding: 5px 3px;
-  border-radius: 16px;
+  padding: 7px 4px;
+  border-radius: 18px;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -113,7 +114,7 @@
 }
 
 .s-month {
-  font-size: 0.58rem;
+  font-size: 0.65rem;
   color: #a0b4c0;
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -122,11 +123,11 @@
 }
 
 .s-day {
-  font-size: 1.3rem;
+  font-size: 1.45rem;
   font-weight: 600;
   color: #213547;
-  width: 36px;
-  height: 36px;
+  width: 42px;
+  height: 42px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -136,7 +137,7 @@
 }
 
 .s-tue {
-  font-size: 0.56rem;
+  font-size: 0.62rem;
   color: #a0b4c0;
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -183,32 +184,32 @@
 .reading-item {
   display: flex;
   align-items: center;
-  gap: 13px;
-  padding: 13px 2px;
+  gap: 16px;
+  padding: 16px 2px;
 }
 
 .reading-icon {
-  width: 34px;
-  height: 34px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #f0f2f5;
-  border-radius: 10px;
-  font-size: 1rem;
+  border-radius: 12px;
+  font-size: 1.15rem;
   flex-shrink: 0;
 }
 
 .reading-name {
   flex: 1;
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   font-weight: 600;
   color: #213547;
   margin: 0;
 }
 
 .reading-range {
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   color: #8fa3b0;
   font-weight: 500;
   white-space: nowrap;
@@ -254,15 +255,16 @@
 .nav-row {
   display: flex;
   justify-content: center;
-  gap: 12px;
-  padding-top: 1.375rem;
+  gap: 14px;
+  padding-top: 1.75rem;
 }
 
 .btn-nav {
-  font-size: 0.95rem;
+  flex: 1;
+  font-size: 1.05rem;
   font-weight: 800;
-  padding: 10px 22px;
-  border-radius: 14px;
+  padding: 15px 0;
+  border-radius: 16px;
   border: 2.5px solid #dde3e8;
   background-color: #f7f9fb;
   color: #213547;
@@ -271,6 +273,7 @@
   box-shadow: 3px 3px 0 #dde3e8;
   transition: transform 0.1s ease, box-shadow 0.1s ease;
   line-height: 1;
+  text-align: center;
 }
 
 .btn-nav:active {
