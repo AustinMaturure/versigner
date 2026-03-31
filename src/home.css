@@ -12,7 +12,7 @@
   padding: 1.5rem 1.5rem 1.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+
   font-family: "Author", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   margin: 0 auto;
 }
