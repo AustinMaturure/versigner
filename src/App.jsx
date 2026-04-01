@@ -76,11 +76,13 @@ const MEMBER_ICONS = { B: "📖", Mama: "🌿", Parthe: "⭐", Muno: "⚡" };
 const BIBLE_ID = "7142879509583d59-01";
 const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
-function getMostRecentTuesday(date = new Date()) {
+function getTuesdayForReading(date = new Date()) {
   const d = new Date(date);
   d.setHours(0, 0, 0, 0);
-  const daysBack = (d.getDay() - 2 + 7) % 7;
-  d.setDate(d.getDate() - daysBack);
+  const day = d.getDay();
+  // Tuesday = 2. If today is Wednesday(3) or later, go to next Tuesday
+  const daysToAdd = day <= 2 ? (2 - day) : (9 - day);
+  d.setDate(d.getDate() + daysToAdd);
   return d;
 }
 
@@ -113,7 +115,7 @@ export default function App() {
 
   const anchorTuesday = useMemo(() => {
     const raw = import.meta.env.VITE_ANCHOR_DATE;
-    return getMostRecentTuesday(raw ? new Date(raw) : new Date("2024-11-26"));
+    return getTuesdayForReading(raw ? new Date(raw) : new Date("2024-11-26"));
   }, []);
 
   const startBookIdx = parseInt(import.meta.env.VITE_CHAPCOUNT) || 22;
@@ -121,7 +123,7 @@ export default function App() {
   const apiKey = import.meta.env.VITE_API_KEY;
 
 
-  const todayTuesday = useMemo(() => getMostRecentTuesday(), []);
+  const todayTuesday = useMemo(() => getTuesdayForReading(), []);
   const [selectedTuesday, setSelectedTuesday] = useState(todayTuesday);
 
 
@@ -222,9 +224,9 @@ export default function App() {
 
  
   const titleFontSize =
-    book.name.length > 13 ? "1.55rem" :
-    book.name.length > 9  ? "2rem" :
-    "2.6rem";
+    book.name.length > 13 ? "1.75rem" :
+    book.name.length > 9  ? "2.8rem" :
+    "2.9rem";
 
   
   return (
@@ -271,7 +273,7 @@ export default function App() {
             >
               <span className="s-month">{MONTHS[date.getMonth()]}</span>
               <span className="s-day">{date.getDate()}</span>
-              <span className="s-tue">TUE</span>
+          
             </button>
           );
         })}
