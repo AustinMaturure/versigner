@@ -224,9 +224,9 @@ export default function App() {
 
  
   const titleFontSize =
-    book.name.length > 13 ? "1.75rem" :
-    book.name.length > 9  ? "2.8rem" :
-    "2.9rem";
+    book.name.length > 13 ? "1.6rem" :
+    book.name.length > 9  ? "2.25rem" :
+    "2.65rem";
 
   
   return (
