@@ -1,5 +1,5 @@
 [build]
-environment = { SECRETS_SCAN_OMIT_KEYS = "VITE_API_KEY,VITE_ANCHOR_DATE" }
+environment = { SECRETS_SCAN_OMIT_KEYS = "VITE_ANCHOR_DATE,VITE_CHAPCOUNT,VITE_COUNT" }
   command = "npm run build" 
   publish = "dist"  
 

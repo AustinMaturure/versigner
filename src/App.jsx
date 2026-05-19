@@ -1,4 +1,5 @@
-import { useEffect, useState, useMemo } from "react";
+import { useState, useMemo } from "react";
+import chapterVerseCounts from "./data/chapterVerseCounts.json";
 import "./home.css";
 
 const BIBLE_BOOKS = [
@@ -73,8 +74,17 @@ const BIBLE_BOOKS = [
 
 const BASE_MEMBERS = ["B", "Mama", "Parthe", "Muno"];
 const MEMBER_ICONS = { B: "📖", Mama: "🌿", Parthe: "⭐", Muno: "⚡" };
-const BIBLE_ID = "7142879509583d59-01";
 const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+/** Verse counts per chapter from bundled CSV data (standard 66-book order, matches {@link BIBLE_BOOKS}). */
+function verseCountForChapter(bookIdx, chapter) {
+  const rows = chapterVerseCounts[bookIdx];
+  if (!rows?.length) return null;
+  const idx = chapter - 1;
+  if (idx < 0 || idx >= rows.length) return null;
+  const n = rows[idx];
+  return typeof n === "number" ? n : null;
+}
 
 function getTuesdayForReading(date = new Date()) {
   const d = new Date(date);
@@ -120,8 +130,6 @@ export default function App() {
 
   const startBookIdx = parseInt(import.meta.env.VITE_CHAPCOUNT) || 22;
   const startChapter = parseInt(import.meta.env.VITE_COUNT) || 1;
-  const apiKey = import.meta.env.VITE_API_KEY;
-
 
   const todayTuesday = useMemo(() => getTuesdayForReading(), []);
   const [selectedTuesday, setSelectedTuesday] = useState(todayTuesday);
@@ -149,50 +157,24 @@ export default function App() {
   }, [weekOffset]);
 
  
-  const [bible, setBible] = useState(null);
-  const [verseRanges, setVerseRanges] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const verseCount = useMemo(
+    () => verseCountForChapter(bookIdx, chapter),
+    [bookIdx, chapter]
+  );
 
-  const apiUrl = `https://api.scripture.api.bible/v1/bibles/${BIBLE_ID}/chapters/${book.abbr}.${chapter}`;
+  const verseRanges = useMemo(() => {
+    if (verseCount == null) return [];
+    const perPart = Math.ceil(verseCount / 4);
+    return Array.from({ length: 4 }, (_, i) => ({
+      start: i * perPart + 1,
+      end: Math.min((i + 1) * perPart, verseCount),
+    }));
+  }, [verseCount]);
 
-  useEffect(() => {
-    setBible(null);
-    setVerseRanges([]);
-    setLoading(true);
-    setError(null);
-
-    fetch(apiUrl, { headers: { "api-key": apiKey } })
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json();
-      })
-      .then(({ data }) => {
-        setBible(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setLoading(false);
-        setError(
-          err.message === "Failed to fetch"
-            ? "Network error — check your connection and reload."
-            : `Could not load ${book.name} ${chapter}. Check your network and reload.`
-        );
-      });
-  }, [apiUrl]);
-
-  // Split verses into four equal partitions
-  useEffect(() => {
-    if (!bible?.verseCount) return;
-    const total = bible.verseCount;
-    const perPart = Math.ceil(total / 4);
-    setVerseRanges(
-      Array.from({ length: 4 }, (_, i) => ({
-        start: i * perPart + 1,
-        end: Math.min((i + 1) * perPart, total),
-      }))
-    );
-  }, [bible]);
+  const dataError =
+    verseCount == null
+      ? `No verse count for ${book.name} chapter ${chapter} in bundled data.`
+      : null;
 
 
   const sliderTuesdays = useMemo(
@@ -282,7 +264,7 @@ export default function App() {
       <div className="dotted-line" />
 
       {/* ── Error ── */}
-      {error && <p className="error-msg">{error}</p>}
+      {dataError && <p className="error-msg">{dataError}</p>}
 
       {/* ── Reading List ── */}
       <div className="reading-list">
@@ -292,9 +274,7 @@ export default function App() {
               <span className="reading-icon">{MEMBER_ICONS[name]}</span>
               <span className="reading-name">{name}</span>
               <span className="reading-range">
-                {loading ? (
-                  <span className="skeleton-pill" />
-                ) : verseRanges[i] ? (
+                {verseRanges[i] ? (
                   `${verseRanges[i].start} – ${verseRanges[i].end}`
                 ) : (
                   "—"
